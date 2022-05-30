@@ -1,0 +1,8 @@
+[core]
+	quotepath = false
+[init]
+	defaultBranch = main
+[push]
+	default = current
+[ghq]
+	root = ~/Code
