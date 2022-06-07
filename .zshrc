@@ -110,13 +110,6 @@ setopt hist_expand
 setopt inc_append_history
 
 ######################################################################
-# other
-######################################################################
-if (( $+commands[direnv] )); then eval "$(direnv hook zsh)"; fi
-if (( $+commands[nodenv] )); then eval "$(nodenv init -)"; fi
-if (( $+commands[pyenv] ));  then eval "$(pyenv init -)"; fi
-
-######################################################################
 # key bind
 ######################################################################
 bindkey '^r' peco-select-history
@@ -140,6 +133,9 @@ if ! which brew >/dev/null 2>&1; then
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	path=(/home/linuxbrew/.linuxbrew/bin(N-/) $path)
 fi
+if ! which direnv >/dev/null 2>&1; then
+	brew install direnv
+fi
 if ! which ghq >/dev/null 2>&1; then
 	brew install ghq
 fi
@@ -155,3 +151,10 @@ fi
 if ! which pt >/dev/null 2>&1; then
 	brew install the_platinum_searcher
 fi
+
+######################################################################
+# other
+######################################################################
+if (( $+commands[direnv] )); then eval "$(direnv hook zsh)"; fi
+if (( $+commands[nodenv] )); then eval "$(nodenv init -)"; fi
+if (( $+commands[pyenv] ));  then eval "$(pyenv init -)"; fi
