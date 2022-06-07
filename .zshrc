@@ -139,11 +139,19 @@ eval "$(sheldon source)"
 if ! which brew >/dev/null 2>&1; then
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	path=(/home/linuxbrew/.linuxbrew/bin(N-/) $path)
-	brew install \
-		ghq \
-		nodenv \
-		peco \
-		pyenv \
-		the_platinum_searcher \
-		;
+fi
+if ! which ghq >/dev/null 2>&1; then
+	brew install ghq
+fi
+if ! which nodenv >/dev/null 2>&1; then
+	brew install nodenv
+fi
+if ! which peco >/dev/null 2>&1; then
+	brew install peco
+fi
+if ! which pyenv >/dev/null 2>&1; then
+	brew install pyenv
+fi
+if ! which pt >/dev/null 2>&1; then
+	brew install the_platinum_searcher
 fi
