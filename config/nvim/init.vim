@@ -5,42 +5,38 @@ let g:vim_dir  = g:config_home . '/nvim'
 let g:dein_dir = g:cache_home  . '/nvim/dein'
 
 if &compatible
-  set nocompatible
+    set nocompatible
 endif
 
 " reset augroup
 augroup MyAutoCmd
-  autocmd!
+    autocmd!
 augroup END
 
 " dein settings {{{
 " dein自体の自動インストール
 let s:dein_repo_dir = g:dein_dir . '/repos/github.com/Shougo/dein.vim'
 if !isdirectory(s:dein_repo_dir)
-  call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
+    call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
 endif
 let &runtimepath = s:dein_repo_dir .",". &runtimepath
 
 " プラグイン読み込み＆キャッシュ作成
 let s:toml_file = g:vim_dir.'/dein.toml'
 let s:lazy_toml_file = g:vim_dir.'/dein_lazy.toml'
-if dein#load_state(g:dein_dir)
-  call dein#begin(g:dein_dir)
-  call dein#load_toml(s:toml_file,      {'lazy': 0})
-  call dein#load_toml(s:lazy_toml_file, {'lazy': 1})
-  call dein#end()
-  call dein#save_state()
-endif
+call dein#begin(g:dein_dir)
+call dein#load_toml(s:toml_file,      {'lazy': 0})
+call dein#load_toml(s:lazy_toml_file, {'lazy': 1})
+call dein#end()
+
+filetype plugin indent on
+syntax enable
 
 " 不足プラグインの自動インストール
-if has('vim_starting') && dein#check_install()
-  let g:dein#install_process_timeout=3600
-  call dein#install()
+if dein#check_install()
+    call dein#install()
 endif
 " }}}
-
-syntax on
-filetype plugin indent on
 
 "set cursorline
 set autoindent
